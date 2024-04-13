@@ -1,0 +1,64 @@
+  <div class="top">
+    <img src="assets/home.png" alt="Home Logo" (click)="showHomePage()">
+    <h1>HighWay Mechanic Finder</h1>
+    <button (click)="showUserRegistration()">User Registration</button>
+    <button (click)="showMechanicRegistration()">Mechanic Registration</button>
+  </div>
+  <hr class="divider"> <!-- Horizontal line divider -->
+  <div class="bottom">
+    <div *ngIf="showHome">
+      <!-- Home page content goes here -->
+      <h2>Welcome to HighWay Mechanic Finder!</h2>
+      <!-- Add more content as needed -->
+      <p>Is your vechile broke down in an unknown place? Do you need a mechanic? <br>
+        <br>
+        <b>Don't Worry</b> We are here to help you.
+      </p>
+      <button (click)="findMechanic()">Find Mechanic</button>
+    </div>
+    <div *ngIf="showRegistration">
+      <!-- User registration form -->
+      <h2>User Registration</h2>
+      <form (submit)="registerUser()">
+        <label for="name" class="right-align">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="userName" required><br><br>
+        <label for="contact" class="right-align">Contact Number:</label>
+        <input type="text" id="contact" name="contact" [(ngModel)]="userContact" required><br><br>
+        <label for="address" class="right-align">Address:</label>
+        <input type="text" id="address" name="address" [(ngModel)]="userAddress" required><br><br>
+        <label for="city" class="right-align">City:</label>
+        <input type="text" id="city" name="city" [(ngModel)]="userCity" required><br><br>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+    <div *ngIf="showMechanicRegistrationFlag">
+        <!-- Mechanic registration form -->
+        <h2>Mechanic Registration</h2>
+        <form (submit)="registerMechanic()">
+            <label for="mechanicName" class="right-align">Name:</label>
+            <input type="text" id="mechanicName" name="mechanicName" [(ngModel)]="mechanicName" required><br><br>
+            <label for="mechanicContact" class="right-align">Contact Number:</label>
+            <input type="text" id="mechanicContact" name="mechanicContact" [(ngModel)]="mechanicContact" required><br><br>
+            <label for="mechanicAddress" class="right-align">Address:</label>
+            <input type="text" id="mechanicAddress" name="mechanicAddress" [(ngModel)]="mechanicAddress" required><br><br>
+            <label for="governmentId" class="right-align">Government ID:</label>
+            <input type="text" id="governmentId" name="governmentId" [(ngModel)]="governmentId" required><br><br>
+            <label for="currentLocation" class="right-align">Location:</label>
+            <input type="checkbox" id="useCurrentLocation" [(ngModel)]="useCurrentLocation">
+            <label>  Use Current Location</label><br><br>
+            <button type="submit">Register Mechanic</button>
+        </form>
+      </div>
+  </div>
+  <hr class="divider"> <!-- Horizontal line divider -->
+  <div class="results">
+    <div *ngFor="let mechanic of mechanics">
+        <!-- Render each mechanic in the list -->
+        <h3>{{ mechanic.name }}</h3>
+        <p>Contact: {{ mechanic.contact }}</p>
+        <p>Address: {{ mechanic.address }}</p>
+        <!-- Add more mechanic details as needed -->
+        <hr> <!-- Horizontal line to separate mechanics -->
+      </div>
+  </div>
+  
