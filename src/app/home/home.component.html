@@ -1,6 +1,6 @@
   <div class="top">
     <img src="assets/home.png" alt="Home Logo" (click)="showHomePage()">
-    <h1>HighWay Mechanic Finder</h1>
+    <h1>Friendly Neighbourhood Garage Finder</h1>
     <button (click)="showUserRegistration()">User Registration</button>
     <button (click)="showMechanicRegistration()">Mechanic Registration</button>
   </div>
@@ -8,26 +8,33 @@
   <div class="bottom">
     <div *ngIf="showHome">
       <!-- Home page content goes here -->
-      <h2>Welcome to HighWay Mechanic Finder!</h2>
+      <h2>Welcome to Friendly Neighbourhood Garage Finder!</h2>
       <!-- Add more content as needed -->
       <p>Is your vechile broke down in an unknown place? Do you need a mechanic? <br>
         <br>
         <b>Don't Worry</b> We are here to help you.
       </p>
-      <button (click)="findMechanic()">Find Mechanic</button>
+      <button (click)="findMechanic()">Find Near By Mechanic</button>
     </div>
     <div *ngIf="showRegistration">
       <!-- User registration form -->
       <h2>User Registration</h2>
-      <form (submit)="registerUser()">
+      <form #registrationForm="ngForm" (submit)="registerUser()">
         <label for="name" class="right-align">Name:</label>
         <input type="text" id="name" name="name" [(ngModel)]="userName" required><br><br>
-        <label for="contact" class="right-align">Contact Number:</label>
-        <input type="text" id="contact" name="contact" [(ngModel)]="userContact" required><br><br>
+        <label for="mobile" class="right-align">Mobile Number:</label>
+        <input type="text" id="mobile" name="mobile" [(ngModel)]="userMobile" required><br><br>
+        <label for="password" class="right-align">Password:</label>
+        <input type="password" id="password" name="password" [(ngModel)]="userPassword" required><br><br>
+        <label for="confirmPassword" class="right-align">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="userConfirmPassword" required><br><br>
         <label for="address" class="right-align">Address:</label>
         <input type="text" id="address" name="address" [(ngModel)]="userAddress" required><br><br>
         <label for="city" class="right-align">City:</label>
         <input type="text" id="city" name="city" [(ngModel)]="userCity" required><br><br>
+        <div *ngIf="showPasswordError">
+          Passwords do not match.
+        </div>
         <button type="submit">Register</button>
       </form>
     </div>
@@ -39,13 +46,24 @@
             <input type="text" id="mechanicName" name="mechanicName" [(ngModel)]="mechanicName" required><br><br>
             <label for="mechanicContact" class="right-align">Contact Number:</label>
             <input type="text" id="mechanicContact" name="mechanicContact" [(ngModel)]="mechanicContact" required><br><br>
+            <label for="password" class="right-align">Password:</label>
+            <input type="password" id="password" name="password" [(ngModel)]="mechanicPassword" required><br><br>
+            <label for="confirmPassword" class="right-align">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="mechanicConfirmPassword" required><br><br>
             <label for="mechanicAddress" class="right-align">Address:</label>
             <input type="text" id="mechanicAddress" name="mechanicAddress" [(ngModel)]="mechanicAddress" required><br><br>
+            <label for="mechanicCity" class="right-align">Address:</label>
+            <input type="text" id="mechanicCity" name="mechanicCity" [(ngModel)]="mechanicCity" required><br><br>
+            <label for="mechanicState" class="right-align">Address:</label>
+            <input type="text" id="mechanicState" name="mechanicState" [(ngModel)]="mechanicState" required><br><br>
             <label for="governmentId" class="right-align">Government ID:</label>
             <input type="text" id="governmentId" name="governmentId" [(ngModel)]="governmentId" required><br><br>
             <label for="currentLocation" class="right-align">Location:</label>
             <input type="checkbox" id="useCurrentLocation" [(ngModel)]="useCurrentLocation">
             <label>  Use Current Location</label><br><br>
+            <div *ngIf="showMechanicPasswordError">
+              Passwords do not match.
+            </div>
             <button type="submit">Register Mechanic</button>
         </form>
       </div>
