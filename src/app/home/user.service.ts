@@ -7,11 +7,11 @@ import { User } from './user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'YOUR_API_GATEWAY_ENDPOINT'; // Replace with your API Gateway endpoint
+  private apiUrl = 'https://j3nb88z7rf.execute-api.ap-south-1.amazonaws.com/Prod'; // Replace with your API Gateway endpoint
 
   constructor(private http: HttpClient) { }
 
   registerUser(user: User): Observable<any> {
-    return this.http.post(this.apiUrl + '/register', user);
+    return this.http.post(this.apiUrl + '/users', user);
   }
 }

@@ -2,7 +2,7 @@
     <img src="assets/home.png" alt="Home Logo" (click)="showHomePage()">
     <h1>Friendly Neighbourhood Garage Finder</h1>
     <button (click)="showUserRegistration()">User Registration</button>
-    <button (click)="showMechanicRegistration()">Mechanic Registration</button>
+    <button (click)="showMechanicRegistration()">Garage Registration</button>
   </div>
   <hr class="divider"> <!-- Horizontal line divider -->
   <div class="bottom">
@@ -14,7 +14,7 @@
         <br>
         <b>Don't Worry</b> We are here to help you.
       </p>
-      <button (click)="findMechanic()">Find Near By Mechanic</button>
+      <button (click)="findMechanic()">Find Near By Garage</button>
     </div>
     <div *ngIf="showRegistration">
       <!-- User registration form -->
@@ -40,7 +40,7 @@
     </div>
     <div *ngIf="showMechanicRegistrationFlag">
         <!-- Mechanic registration form -->
-        <h2>Mechanic Registration</h2>
+        <h2>Garage Registration</h2>
         <form (submit)="registerMechanic()">
             <label for="mechanicName" class="right-align">Name:</label>
             <input type="text" id="mechanicName" name="mechanicName" [(ngModel)]="mechanicName" required><br><br>
@@ -52,9 +52,9 @@
             <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="mechanicConfirmPassword" required><br><br>
             <label for="mechanicAddress" class="right-align">Address:</label>
             <input type="text" id="mechanicAddress" name="mechanicAddress" [(ngModel)]="mechanicAddress" required><br><br>
-            <label for="mechanicCity" class="right-align">Address:</label>
+            <label for="mechanicCity" class="right-align">City:</label>
             <input type="text" id="mechanicCity" name="mechanicCity" [(ngModel)]="mechanicCity" required><br><br>
-            <label for="mechanicState" class="right-align">Address:</label>
+            <label for="mechanicState" class="right-align">State:</label>
             <input type="text" id="mechanicState" name="mechanicState" [(ngModel)]="mechanicState" required><br><br>
             <label for="governmentId" class="right-align">Government ID:</label>
             <input type="text" id="governmentId" name="governmentId" [(ngModel)]="governmentId" required><br><br>
@@ -69,12 +69,12 @@
       </div>
   </div>
   <hr class="divider"> <!-- Horizontal line divider -->
-  <div class="results">
+  <div class="results" *ngIf="showResultsFlag">
     <div *ngFor="let mechanic of mechanics">
         <!-- Render each mechanic in the list -->
-        <h3>{{ mechanic.name }}</h3>
-        <p>Contact: {{ mechanic.contact }}</p>
-        <p>Address: {{ mechanic.address }}</p>
+        <h3>{{ mechanic.Name }}</h3>
+        <p>Contact: {{ mechanic.ContactNumber }}</p>
+        <p>Address: {{ mechanic.Address }}</p>
         <!-- Add more mechanic details as needed -->
         <hr> <!-- Horizontal line to separate mechanics -->
       </div>

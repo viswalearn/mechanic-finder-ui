@@ -17,6 +17,7 @@ export class HomeComponent {
   showMechanicRegistrationFlag = false;
   showPasswordError = false;
   showMechanicPasswordError = false;
+  showResultsFlag = false;
   userName: string = '';
   userMobile: string = '';
   userAddress: string = '';
@@ -34,7 +35,7 @@ export class HomeComponent {
   useCurrentLocation: boolean = false;
   latitude: number = 0;
   longitude: number = 0;
-  mechanics: any[] = [];
+  mechanics: Mechanic[] = [];
 
   constructor(private userService: UserService,
     private mechanicService: MechanicService
@@ -44,18 +45,21 @@ export class HomeComponent {
     this.showHome = true;
     this.showRegistration = false;
     this.showMechanicRegistrationFlag = false;
+    this.showResultsFlag = false;
   }
 
   showUserRegistration() {
     this.showHome = false;
     this.showRegistration = true;
     this.showMechanicRegistrationFlag = false;
+    this.showResultsFlag = false;
   }
 
   showMechanicRegistration() {
     this.showHome = false;
     this.showRegistration = false;
     this.showMechanicRegistrationFlag = true;
+    this.showResultsFlag = false;
   }
 
   registerMechanic() {
@@ -73,15 +77,15 @@ export class HomeComponent {
     }
 
     const mechanicData : Mechanic = {
-      name: this.mechanicName,
-      contact: this.mechanicContact,
-      password: this.mechanicPassword,
-      address: this.mechanicAddress,
-      governmentId: this.governmentId,
-      latitude: this.latitude,
-      longitude: this.longitude,
-      city: this.mechanicCity,
-      state: this.mechanicState
+      Name: this.mechanicName,
+      ContactNumber: this.mechanicContact,
+      Password: this.mechanicPassword,
+      Address: this.mechanicAddress,
+      GovernmentId: this.governmentId,
+      Latitude: this.latitude,
+      Longitude: this.longitude,
+      City: this.mechanicCity,
+      State: this.mechanicState
     };
 
     console.log('Registering mechanic:', mechanicData);
@@ -110,11 +114,11 @@ export class HomeComponent {
   registerUser() {
     // Call your REST endpoint with the user registration data
     const userData: User = {
-      name: this.userName,
-      contact: this.userMobile,
-      address: this.userAddress,
-      city: this.userCity,
-      password: this.userPassword
+      Name: this.userName,
+      ContactNumber: this.userMobile,
+      Address: this.userAddress,
+      City: this.userCity,
+      Password: this.userPassword
     };
     console.log('Registering user:', userData);
     if(this.userPassword !== this.userConfirmPassword) {
@@ -159,29 +163,23 @@ export class HomeComponent {
   }
 
   findMechanic() {
+    const mechlist: Mechanic[] = [];
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
+        //const latitude = position.coords.latitude;
+        //const longitude = position.coords.longitude;
+        const latitude = 12.986480601510985;
+        const longitude = 77.67977322535576;
 
         // Call REST endpoint with location data
-        console.log('Current location:', latitude, longitude);
-        // Make HTTP request to your REST endpoint
-        // Example:
-        // this.http.get(`your-rest-endpoint?lat=${latitude}&lng=${longitude}`).subscribe(response => {
-        //   console.log('Response from REST endpoint:', response);
-        // });
-        this.mechanics = [{
-          "name" : "mechanic1",
-          "contact" : "123456789",
-          "address" : "NH48"
-        },
-        {
-          "name" : "mechanic2",
-          "contact" : "123456788",
-          "address" : "NH48"
-        }
-      ]
+      console.log('Current location:', latitude, longitude);
+      console.log("Calling get mechanic");
+      this.mechanicService.getMechanic(latitude, longitude).subscribe(mechanicsList => {
+        console.log("Received response");
+        console.log(mechanicsList);
+        this.showResultsFlag = true;
+        this.mechanics = mechanicsList;
+      })
       }, error => {
         console.error('Error getting location:', error);
       });

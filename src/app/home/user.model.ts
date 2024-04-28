@@ -1,8 +1,8 @@
 export class User {
-    name: string = '';
-    contact: string = '';
-    address: string = '';
-    city: string = '';
-    password: string = '';
+    Name: string = '';
+    ContactNumber: string = '';
+    Address: string = '';
+    City: string = '';
+    Password: string = '';
   }
   

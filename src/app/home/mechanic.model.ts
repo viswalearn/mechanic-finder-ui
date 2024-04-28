@@ -1,11 +1,16 @@
 export class Mechanic {
-    name: string = '';
-    contact: string = '';
-    address: string = '';
-    city: string = '';
-    password: string = '';
-    state: string = '';
-    governmentId: string = '';
-    latitude: number = 0;
-    longitude: number = 0;
+    Name: string = '';
+    ContactNumber: string = '';
+    Address: string = '';
+    City: string = '';
+    Password: string = '';
+    State: string = '';
+    GovernmentId: string = '';
+    Latitude: number = 0;
+    Longitude: number = 0;
   }
+
+export class GeoInput {
+  Latitude: number = 0;
+  Longitude: number = 0;
+}
